@@ -1,19 +1,19 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 const navigation = [
-  { title: "About us", to: "about" },
-  { title: "Residential Services", to: "residential" },
-  { title: "Business Solutions", to: "business" },
-  { title: "Support Request", to: "support" },
-  { title: "Contact us", to: "contact" },
+  { title: "About us", to: "/about" },
+  { title: "Residential Services", to: "/residential" },
+  { title: "Business Solutions", to: "/business" },
+  { title: "Support Request", to: "/support" },
+  { title: "Contact us", to: "/contact" },
 ];
 
 function Navigation() {
-  const currentPage = useLocation().pathname;
+  const pathName = useLocation().pathname;
+
   return (
     <Disclosure
       as="nav"
@@ -25,29 +25,31 @@ function Navigation() {
             <div className="relative h-16 flex items-center justify-between lg:border-b lg:border-indigo-400 lg:border-opacity-25">
               <div className="px-2 flex items-center lg:px-0">
                 <div className="flex-shrink-0">
-                  <img
-                    className="block h-8 w-8"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-300.svg"
-                    alt="Workflow"
-                  />
+                  <Link to="/">
+                    <img
+                      className="block h-8 w-auto"
+                      src="https://myboip.com/wp-content/uploads/2017/04/logo-png.png"
+                      alt="BOIP"
+                    />
+                  </Link>
                 </div>
                 <div className="hidden lg:block lg:ml-10">
                   <div className="flex space-x-4">
                     {navigation.map((item, itemIdx) =>
-                      currentPage === item.to ? (
+                      pathName === item.to ? (
                         <Link
                           key={`${item.title}`}
                           to={item.to}
-                          className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                          className="bg-indigo-700 text-white block rounded-md py-2 px-3 text-base font-medium"
                         >
                           {item.title}
                         </Link>
                       ) : (
-                        /* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */
+                        /* Current: "bg-indigo-700 text-white", Default: "text-white hover:bg-indigo-500 hover:bg-opacity-75" */
                         <Link
                           key={`${item.title}`}
                           to={item.to}
-                          className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                          className="text-white hover:bg-indigo-500 hover:bg-opacity-75 block rounded-md py-2 px-3 text-base font-medium"
                         >
                           {item.title}
                         </Link>
@@ -55,9 +57,9 @@ function Navigation() {
                     )}
                   </div>
                 </div>
-                <div className="-mr-2 flex md:hidden">
+                <div className="flex lg:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                  <Disclosure.Button className="bg-indigo-600 p-2 rounded-md inline-flex items-center justify-center text-indigo-200 hover:text-white hover:bg-indigo-500 hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -70,23 +72,23 @@ function Navigation() {
             </div>
           </div>
 
-          <Disclosure.Panel className="border-b border-gray-700 md:hidden">
-            <div className="px-2 py-3 space-y-1 sm:px-3">
+          <Disclosure.Panel className="lg:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item, itemIdx) =>
-                currentPage === item.to ? (
+                pathName === item.to ? (
                   <Link
                     key={`${item.title}`}
                     to={item.to}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="bg-indigo-700 text-white block rounded-md py-2 px-3 text-base font-medium"
                   >
                     {item.title}
                   </Link>
                 ) : (
-                  /* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */
+                  /* Current: "bg-indigo-700 text-white", Default: "text-white hover:bg-indigo-500 hover:bg-opacity-75" */
                   <Link
                     key={`${item.title}`}
                     to={item.to}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-white hover:bg-indigo-500 hover:bg-opacity-75 block rounded-md py-2 px-3 text-base font-medium"
                   >
                     {item.title}
                   </Link>
